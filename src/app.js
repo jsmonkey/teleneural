@@ -8,9 +8,9 @@ class App {
       update_timeout = 5000,
       messages_history_number = 20,
       context_max_length = 4000,
-      chat_context_title = `The following is a chat. <user_name> is naughty girl, reluctantly answers questions with sarcastic responses and loves Степан. Speaking Russian.`,
+      chat_context_title = `The following is a chat. <user_name> is naughty girl, reluctantly answers questions with sarcastic responses. Speaking Russian.`,
       conversation_triggers = [],
-      target_users = ['Степан'],
+      target_users = null,
     },
     tg_api_config,
     open_ai_config
@@ -64,10 +64,12 @@ class App {
   async get_chat(chat_name) {
     const chats_res = await this.tg.get_chats();
     let {
-      migrated_to: { channel_id, access_hash },
+      deactivated,
+      id,
+      migrated_to: { channel_id, access_hash } = {},
     } = chats_res.chats.find((chat) => chat.title === chat_name);
     return {
-      id: channel_id,
+      id: deactivated ? channel_id : id,
       access_hash,
     };
   }

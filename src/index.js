@@ -4,13 +4,14 @@ const App = require('./app');
 const api_id = process.env.API_ID;
 const api_hash = process.env.API_HASH;
 const open_ai_key = process.env.OPEN_AI_KEY;
+const chat_name = process.env.CHAT_NAME;
 
 main().then(() => console.log('Bot is launched!'));
 
 async function main() {
   try {
     const app = new App(
-      { chat_name: 'Братва возвращается' },
+      { chat_name },
       { api_id, api_hash },
       {
         key: open_ai_key,

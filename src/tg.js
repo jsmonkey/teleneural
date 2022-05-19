@@ -21,20 +21,20 @@ class TG {
     };
   }
 
-  set_typing(data) {
+  set_typing(peer) {
     return this.mtproto.call('messages.setTyping', {
-      peer: this.get_peer(data),
+      peer: this.get_peer(peer),
       action: {
         _: 'sendMessageTypingAction',
       },
     });
   }
 
-  send_message(message, data) {
+  send_message(message, peer) {
     return this.mtproto.call('messages.sendMessage', {
       message,
       random_id: new Date().valueOf(),
-      peer: this.get_peer(data),
+      peer: this.get_peer(peer),
     });
   }
 
