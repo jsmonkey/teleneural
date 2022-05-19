@@ -1,7 +1,7 @@
 {
   "name": "teleneural",
   "version": "1.0.0",
-  "description": "",
+  "description": "TG OpenAI bot",
   "main": "src/index.js",
   "scripts": {
     "bot:launch": "node src/index.js",

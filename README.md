@@ -1,6 +1,4 @@
-[![MIT License][license-image]][license-url]
-
-`Teleneural` is a telegram bot powered with OpenAI.
+Teleneural is a telegram bot powered with OpenAI.
 
 With help of Telegram API it may emulate any user in a chat and keep conversation going.
 
