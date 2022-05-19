@@ -179,20 +179,20 @@ class App {
       await this.tg.set_typing(this.config.chat);
       const chat_context = this.generate_chat_context();
 
-      let message = await this.ai.generate_message(chat_context, {
-        user_name: this.config.user_name,
-      });
+      const config_override = {
+        stop: [`@${this.config.user_name}`, '\n'],
+      };
+
+      let message = await this.ai.generate_message(
+        chat_context,
+        config_override
+      );
 
       while (this.is_repetition(message)) {
-        console.log('Repeated message: ', message);
-        message = await this.ai.generate_message(chat_context, {
-          user_name: this.config.user_name,
-        });
+        message = await this.ai.generate_message(chat_context, config_override);
         this.ai.reconfigure();
       }
 
-      console.log('Chat context: ', chat_context);
-      console.log('Message: ', message);
       await this.tg.send_message(message, this.config.chat);
     } catch (e) {
       console.error('Reply error:', e);

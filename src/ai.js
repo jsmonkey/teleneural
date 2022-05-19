@@ -26,6 +26,7 @@ class AI {
       prompt: chat_context,
       stop: [`@${config_override.user_name}`, '\n'],
       ...this.config,
+      ...config_override,
     });
 
     const [{ text }] = res.data.choices;
