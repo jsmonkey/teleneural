@@ -1,5 +1,8 @@
 const prompt = require('prompt');
 const App = require('./app');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 const api_id = process.env.API_ID;
 const api_hash = process.env.API_HASH;
