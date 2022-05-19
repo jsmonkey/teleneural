@@ -8,7 +8,7 @@ class App {
       update_timeout = 5000,
       messages_history_number = 20,
       context_max_length = 4000,
-      chat_context_title = `The following is a chat. <user_name> is naughty girl, reluctantly answers questions with sarcastic responses. Speaking Russian.`,
+      chat_context_title = `The following is a chat. <user_name> is naughty and reluctantly answers questions with long sarcastic responses. Speaking Russian.`,
       conversation_triggers = [],
       target_users = null,
     },
