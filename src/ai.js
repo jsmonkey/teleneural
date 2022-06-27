@@ -1,8 +1,8 @@
-const OpenAI = require('openai-api');
-
+const { Configuration, OpenAIApi } = require('openai');
 class AI {
   constructor({
     key,
+    model,
     engine = 'text-davinci-002',
     max_tokens = 120,
     temperature = 0.9,
@@ -10,27 +10,38 @@ class AI {
     frequency_penalty = 0.6,
     presence_penalty = 0.2,
   }) {
-    this.openai = new OpenAI(key);
+    const configuration = new Configuration({
+      apiKey: key,
+    });
+    this.openai = new OpenAIApi(configuration);
     this.config = {
-      engine,
       max_tokens,
       temperature,
       top_p,
       frequency_penalty,
       presence_penalty,
     };
+
+    if (model) {
+      this.config.model = model;
+    } else {
+      this.config.engine = engine;
+    }
   }
 
   async generate_message(chat_context, config_override) {
-    const res = await this.openai.complete({
-      prompt: chat_context,
-      stop: [`@${config_override.user_name}`, '\n'],
-      ...this.config,
-      ...config_override,
-    });
+    try {
+      const res = await this.openai.createCompletion({
+        prompt: chat_context,
+        ...this.config,
+        ...config_override,
+      });
 
-    const [{ text }] = res.data.choices;
-    return text.trim();
+      const [{ text }] = res.data.choices;
+      return text.trim();
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   reconfigure() {

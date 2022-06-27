@@ -6,11 +6,11 @@ class App {
     {
       chat_name,
       update_timeout = 5000,
-      messages_history_number = 20,
+      messages_history_number = 30,
       context_max_length = 4000,
-      chat_context_title = `The following is a chat. <user_name> is naughty and reluctantly answers questions with long sarcastic responses. Speaking Russian.`,
+      chat_context_title = `The following is a chat to get Степан attention. Стефания <user_name> is a naughty bitch and loves to seduce Степан with sexy phrases. Speaking Russian.`,
       conversation_triggers = [],
-      target_users = null,
+      target_users = ['Степан'],
     },
     tg_api_config,
     open_ai_config
@@ -178,9 +178,10 @@ class App {
     try {
       await this.tg.set_typing(this.config.chat);
       const chat_context = this.generate_chat_context();
+      console.log(chat_context);
 
       const config_override = {
-        stop: [`@${this.config.user_name}`, '\n'],
+        stop: [this.config.user_name, '\n'],
       };
 
       let message = await this.ai.generate_message(

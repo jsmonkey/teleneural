@@ -22,7 +22,7 @@
   "homepage": "https://github.com/jsmonkey/teleneural#readme",
   "dependencies": {
     "@mtproto/core": "^6.1.1",
-    "openai-api": "^1.2.6",
+    "openai": "3.0.0",
     "prompt": "^1.2.1",
     "dotenv": "16.0.1"
   },
